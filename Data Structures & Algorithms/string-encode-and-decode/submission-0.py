@@ -1,0 +1,31 @@
+class Solution:
+
+    def encode(self, strs: List[str]) -> str:
+        # Para hacer encode, vamos a generar una string nueva, que sea len1|word1len2|word2...
+        res = ""
+
+        for s in strs:
+            res += str(len(s)) + '|' + s
+        
+        return res
+
+    def decode(self, s: str) -> List[str]:
+        # Para decodear, hay que leer el numero y el hashtag (doble puntero)
+        
+        res = []
+        i = 0
+
+        while i < len(s):
+            j = i
+
+            while s[j] != '|':
+                j += 1
+            
+            size_word = int(s[i:j])
+            i = j+1
+            j = i + size_word
+
+            res.append(s[i:j])
+            i = j
+        
+        return res
